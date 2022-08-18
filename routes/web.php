@@ -65,6 +65,7 @@ Route::get("/search",[AdminController::class,"search"]);
 
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
