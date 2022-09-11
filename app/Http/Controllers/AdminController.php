@@ -46,8 +46,17 @@ class AdminController extends Controller
 
     public function updateview($id)
     {
-        $data = food::find($id);
-        return view("admin.updateview",compact("data"));
+        if(Auth::id()){
+            $data = food::find($id);
+            return view("admin.updateview",compact("data")); 
+        }
+
+        else
+        {
+
+            return redirect('login');
+        }
+        
     }
 
     public function update(Request $request,$id)
@@ -124,9 +133,16 @@ class AdminController extends Controller
     }
 
     public function viewchef()
-    {
+    {   
+        if(Auth::id()){
         $data=foodchef::all();
         return view("admin.adminchef",compact("data"));
+        }
+        else
+        {
+
+            return redirect('login');
+        }
     }
 
     public function uploadchef(Request $request)
@@ -188,11 +204,19 @@ class AdminController extends Controller
 
     public function orders()
     {
-
-        $data=order::all();
+        if(Auth::id()){
+            $data=order::all();
 
        
-        return view('admin.orders',compact('data'));
+            return view('admin.orders',compact('data'));
+
+        }
+        else
+        {
+
+            return redirect('login');
+        }
+        
     }
 
     public function search(Request $request)
